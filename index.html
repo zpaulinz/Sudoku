@@ -15,19 +15,21 @@
     <button id="new-game" class="btn btn-primary">New game</button>
     <!-- Modal Window -->
     <div class="modal fade" id="difficulty-modal" tabindex="-1" aria-labelledby="difficulty-modal-label" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered" style="margin-top: 0px;">
             <div class="modal-content">
-                <div class="modal-header"></div>
-                <h2 class="modal-title" id="difficulty-modal-label">Select difficulty level</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label for="difficulty">Difficulty level:</label>
-                <select id="difficulty">
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
+                <div class="modal-header">
+                    <h3 class="modal-title" id="difficulty-modal-label">Select difficulty level</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="difficulty">
+                        <input type="radio" class="btn-check" name="options-base" id="difficulty-easy" autocomplete="off">
+                        <label class="btn btn-outline-success" for="difficulty-easy">Easy</label>
+                        <input type="radio" class="btn-check" name="options-base" id="difficulty-medium" autocomplete="off">
+                        <label class="btn btn-outline-warning" for="difficulty-medium">Medium</label>
+                        <input type="radio" class="btn-check" name="options-base" id="difficulty-hard" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="difficulty-hard">Hard</label>
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" id="start-game" class="btn btn-primary">Confirm</button>

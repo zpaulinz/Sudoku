@@ -4,9 +4,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const newGameButton = document.querySelector("#new-game");
     const difficultyModal = document.getElementById("difficulty-modal");
     const startGameButton = document.querySelector("#start-game");
-    
+    const switchElement = document.getElementById('flexSwitchCheckChecked');
+
     let selectedDifficulty = "easy";
     let solution = []
+
+    // Set default mode to light if no preference is saved  
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode'); // Enable dark mode if saved in localStorage  
+        switchElement.checked = false; // Set switch to off  
+    }
+
+    // Listen for switch state changes  
+    switchElement.addEventListener('change', function () {
+        if (switchElement.checked) {
+            document.body.classList.remove('dark-mode'); // Disable dark mode  
+            localStorage.setItem('theme', 'light'); // Save preference as "light" 
+        } else {
+            document.body.classList.add('dark-mode'); // Enable dark mode
+            localStorage.setItem('theme', 'dark'); // Save preference as "dark"  
+        }
+    });
 
     // "New Game" Button - Show Difficulty Modal
     newGameButton.addEventListener("click", () => {

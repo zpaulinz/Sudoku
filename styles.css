@@ -88,7 +88,7 @@ body.dark-mode .user-input {
     font-weight: bold;
 }
 
-body.dark-mode #flexSwitchCheckChecked {
+body.dark-mode #modeSwitcher {
     margin-right: 50px; 
     width: 40px;
     height: 25px;

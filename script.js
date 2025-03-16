@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Paulina Zabielska
+// All rights reserved. This code cannot be used, copied, modified, or distributed for commercial purposes without the author's permission.
+
 document.addEventListener("DOMContentLoaded", () => {
     const successMessage = document.getElementById("success-message");
     const board = document.querySelector("#sudoku-board tbody");

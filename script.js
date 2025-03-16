@@ -4,49 +4,51 @@ document.addEventListener("DOMContentLoaded", () => {
     const newGameButton = document.querySelector("#new-game");
     const difficultyModal = document.getElementById("difficulty-modal");
     const startGameButton = document.querySelector("#start-game");
-    const switchElement = document.getElementById('flexSwitchCheckChecked');
+    const switchElement = document.getElementById('modeSwitcher');
 
     let selectedDifficulty = "easy";
     let solution = []
 
     // Set default mode to light if no preference is saved  
     if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-mode'); // Enable dark mode if saved in localStorage  
+
+        // Enable dark mode if saved in localStorage  
+        document.body.classList.add('dark-mode'); 
         switchElement.checked = false; // Set switch to off  
     }
 
-    // Listen for switch state changes  
+    // Listen for switch state changes.
     switchElement.addEventListener('change', function () {
         if (switchElement.checked) {
-            document.body.classList.remove('dark-mode'); // Disable dark mode  
-            localStorage.setItem('theme', 'light'); // Save preference as "light" 
+            document.body.classList.remove('dark-mode'); 
+            localStorage.setItem('theme', 'light'); 
         } else {
-            document.body.classList.add('dark-mode'); // Enable dark mode
-            localStorage.setItem('theme', 'dark'); // Save preference as "dark"  
+            document.body.classList.add('dark-mode'); 
+            localStorage.setItem('theme', 'dark'); 
         }
     });
 
-    // "New Game" Button - Show Difficulty Modal
+    // "New Game" button - show difficulty modal.
     newGameButton.addEventListener("click", () => {
         const modal = new bootstrap.Modal(difficultyModal);
         modal.show();
     });
 
-    // Difficulty Level Selection
+    // Difficulty level selection.
     document.querySelectorAll(".difficulty input").forEach(input => {
         input.addEventListener("change", (event) => {
             selectedDifficulty = event.target.id.replace("difficulty-", "");
         });
     });
 
-    // "Confirm" Button -> Generate Sudoku
+    // "Confirm" button -> generate sudoku.
     startGameButton.addEventListener("click", () => {
         generateSudoku(selectedDifficulty);
         const modalInstance = bootstrap.Modal.getInstance(difficultyModal);
         modalInstance.hide();
     });
 
-    // Create Empty Sudoku Board
+    // Create empty sudoku board.
     function createEmptyBoard() {
         board.innerHTML = "";
         for (let i = 0; i < 9; i++) {
@@ -68,8 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createEmptyBoard();
 
-    // Check If User's Input Matches Solution
-     function checkSolution() {
+    // Check if user's input matches solution.
+    function checkSolution() {
         let cells = board.querySelectorAll("input");
         let index = 0;
         for (let i = 0; i < 9; i++) {
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;   
     }
 
-    // Generate Full Sudoku Board
+    // Generate full sudoku board.
     function generateFullSudoku() {
         let board = new Array(9).fill(null).map(() => new Array(9).fill(0));
 
@@ -119,10 +121,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return board;
     }
 
-    // Generate Sudoku Puzzle with Missing Values (Removing Numbers)
+    // Generate sudoku puzzle with missing values (removing numbers).
     function createSudokuPuzzle(difficulty) {
         let solutionBoard = generateFullSudoku();
-        let puzzle = JSON.parse(JSON.stringify(solutionBoard)); // Copy for User
+        let puzzle = JSON.parse(JSON.stringify(solutionBoard)); // Copy for user.
 
         let removeCount = difficulty === "easy" ? 20 : difficulty === "medium" ? 40 : 55;
         while (removeCount > 0) {
@@ -137,13 +139,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return { puzzle, solutionBoard };
     }
 
-    // Generate And Display New Sudoku Puzzle
+    // Generate and display new sudoku puzzle.
     function generateSudoku(difficulty) {
         let { puzzle, solutionBoard } = createSudokuPuzzle(difficulty);
         solution = solutionBoard;
         successMessage.style.visibility = "hidden";  
 
-        // Fill The Board With Puzzle Values
+        // Fill the board with puzzle values.
         let cells = board.querySelectorAll("input");
         let index = 0;
         for (let i = 0; i < 9; i++) {
@@ -159,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     input.classList.add("user-input");     
                 }
 
-                // Validation Of Entered Numbers
+                // Validation of entered numbers.
                 input.addEventListener("input", (e) => {
                     if (!/^[1-9]$/.test(e.target.value)) {
                         e.target.value = "";
